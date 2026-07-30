@@ -29,19 +29,17 @@
     line-height: 1.55;
   }
 
-  /* Custom scrollbar */
+  /* Hide scrollbar for all browsers while preserving scroll functionality */
+  html, body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
   ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #F7F5F2;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #B5651D;
-    border-radius: 0;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #D9A566;
+    display: none;
+    width: 0px;
+    height: 0px;
+    background: transparent;
   }
 }
 
