@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background-color: #ffffff;
+    color: #141414;
+    letter-spacing: -0.011em;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  p {
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F7F5F2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #B5651D;
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D9A566;
+  }
+}
+
+@media (max-width: 767px) {
+  p:not(.text-left):not(.text-center):not(.text-right) {
+    text-align: justify !important;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+
+  /* Apple-inspired Fluid Typography utilities */
+  .text-fluid-hero {
+    font-size: clamp(2.25rem, 4.5vw + 0.75rem, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  .text-fluid-h2 {
+    font-size: clamp(1.75rem, 3.2vw + 0.5rem, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+
+  .text-fluid-h3 {
+    font-size: clamp(1.25rem, 1.8vw + 0.5rem, 1.875rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .text-fluid-subheading {
+    font-size: clamp(1rem, 1.2vw + 0.4rem, 1.25rem);
+    line-height: 1.5;
+    letter-spacing: -0.015em;
+  }
+}
+
