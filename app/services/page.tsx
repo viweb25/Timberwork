@@ -4,6 +4,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { getServices } from "@/lib/data-service";
 import { generatePageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 import { ServicesGridInteractive } from "@/components/sections/ServicesGridInteractive";
 
 export const metadata: Metadata = generatePageMetadata({
@@ -19,24 +20,15 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-dark pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="block w-8 h-0.5 bg-brand-wood" />
-            <p className="text-brand-woodLight text-xs sm:text-sm font-semibold tracking-wider uppercase">
-              Our Services
-            </p>
-          </div>
-          <h1 className="text-fluid-h2 font-semibold md:font-bold text-white mb-4 tracking-[-0.03em] leading-[1.08]">
-            End-to-End Construction &{" "}
-            <span className="text-brand-wood">Renovation</span>
-          </h1>
-          <p className="text-white/70 text-base md:text-lg font-normal leading-relaxed tracking-tight max-w-2xl">
-            From groundwork to finishing touches — we deliver complete, quality
-            solutions for residential, commercial and industrial projects.
-          </p>
-        </div>
-      </section>
+      <AnimatedPageHero
+        title={"End-to-End Construction &\nRenovation"}
+        highlightWord="Renovation"
+        description="From groundwork to finishing touches — we deliver complete, quality solutions for residential, commercial and industrial projects."
+        breadcrumbs={[
+          { label: "HOME", href: "/" },
+          { label: "OUR SERVICES" }
+        ]}
+      />
 
       {/* Services Grid (Enhanced UI) */}
     {/* Services Grid */}

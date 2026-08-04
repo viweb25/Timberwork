@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -16,116 +17,84 @@ const navLinks = [
 ];
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
-      <header
+      <header 
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100"
-            : "bg-brand-dark"
+          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          isScrolled 
+            ? 'bg-black border-b border-white/10 shadow-lg' 
+            : 'bg-transparent border-b border-transparent'
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[60px] md:h-[80px]">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group" id="header-logo">
-              <div className="relative w-[180px] h-[60px] md:w-[280px] md:h-[80px] flex-shrink-0">
-                {/* Logo for scrolled / light background */}
-                <Image
-                  src="https://res.cloudinary.com/defqgygsf/image/upload/v1785314867/loogo-removebg-preview_iannzb.png"
-                  alt="Timberpark Pte. Ltd. Logo"
-                  fill
-                  className={cn(
-                    "object-contain object-left transition-opacity duration-300",
-                    scrolled ? "opacity-100" : "opacity-0"
-                  )}
-                  priority
-                />
-                {/* Logo for top / dark background */}
-                <Image
-                  src="https://res.cloudinary.com/defqgygsf/image/upload/v1785313073/logoo-removebg-preview_qa5j6h.png"
-                  alt="Timberpark Pte. Ltd. Logo"
-                  fill
-                  className={cn(
-                    "object-contain object-left transition-opacity duration-300",
-                    scrolled ? "opacity-0" : "opacity-100"
-                  )}
-                  priority
-                />
-              </div>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-6" id="desktop-nav">
+        <div className="w-full px-4 sm:px-6 lg:px-8 relative max-w-7xl mx-auto">
+          <div className="flex h-[60px] md:h-[80px] items-center justify-between relative z-10">
+            {/* Logo on the left */}
+            <div className="flex items-center z-20">
+              <Link href="/" className="flex items-center gap-0 group">
+                <div className="relative w-[180px] h-[60px] md:w-[280px] md:h-[80px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src="https://res.cloudinary.com/defqgygsf/image/upload/v1785313073/logoo-removebg-preview_qa5j6h.png"
+                    alt="Timberpark Pte. Ltd. Logo"
+                    fill
+                    className="object-contain object-left"
+                    priority
+                  />
+                </div>
+              </Link>
+            </div>
+            
+            {/* Absolutely Centered Navigation - Only visible on large screens (desktop) */}
+            <nav className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 gap-8 text-[15px] font-medium tracking-wide z-10">
               {navLinks.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   prefetch={true}
-                  className={cn(
-                    "text-sm font-medium tracking-tight transition-colors duration-200",
-                    scrolled 
-                      ? "text-brand-dark hover:text-brand-wood" 
-                      : "text-white/90 hover:text-brand-wood"
-                  )}
+                  className="transition-colors duration-300 text-white hover:text-brand-wood"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
-
-            {/* CTA + Mobile Toggle */}
-            <div className="flex items-center gap-3">
+            
+            {/* Mobile menu button and CTA on the right */}
+            <div className="flex items-center gap-4 z-20">
               <Button
                 href="/contact"
                 variant="primary"
                 size="sm"
                 arrow
-                id="header-cta"
-                className="hidden sm:inline-flex text-xs"
+                className="hidden sm:inline-flex text-xs border-none"
               >
                 Get a Free Quote
               </Button>
 
-              {/* Mobile Menu Button */}
-              <button
-                id="mobile-menu-toggle"
-                onClick={() => setMenuOpen(!menuOpen)}
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={cn(
-                  "lg:hidden p-2 hover:text-brand-wood transition-colors",
-                  scrolled ? "text-brand-dark" : "text-white"
+                  "lg:hidden p-2 hover:bg-white/10 rounded-md transition-all duration-300 relative group",
+                  isMenuOpen ? 'opacity-0 scale-0 pointer-events-none' : 'opacity-100 scale-100',
+                  "text-white"
                 )}
-                aria-label="Toggle menu"
+                aria-label="Toggle navigation menu"
               >
-                <div className="w-6 flex flex-col gap-1.5">
-                  <span
-                    className={cn(
-                      "block h-0.5 bg-current transition-all duration-300",
-                      menuOpen && "rotate-45 translate-y-2"
-                    )}
-                  />
-                  <span
-                    className={cn(
-                      "block h-0.5 bg-current transition-all duration-300",
-                      menuOpen && "opacity-0"
-                    )}
-                  />
-                  <span
-                    className={cn(
-                      "block h-0.5 bg-current transition-all duration-300",
-                      menuOpen && "-rotate-45 -translate-y-2"
-                    )}
-                  />
+                <div className="relative w-[30px] h-[15px] flex flex-col justify-between transform transition-transform duration-300 group-hover:scale-110">
+                  <span className="block h-[3px] w-[30px] bg-current rounded-full transition-all duration-600 ease-in-out origin-center" />
+                  <span className="block h-[3px] w-[30px] bg-current rounded-full transition-all duration-600 ease-in-out origin-center" />
                 </div>
               </button>
             </div>
@@ -134,45 +103,67 @@ export function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div
+      <div 
         className={cn(
-          "fixed inset-0 z-40 lg:hidden transition-all duration-300",
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          "fixed inset-0 z-50 lg:hidden transition-all duration-300",
+          isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
-        <div
-          className="absolute inset-0 bg-black/50"
-          onClick={() => setMenuOpen(false)}
-        />
-        <nav
+        <div 
           className={cn(
-            "absolute top-0 right-0 h-full w-72 bg-brand-dark flex flex-col pt-24 pb-8 px-8 transition-transform duration-300",
-            menuOpen ? "translate-x-0" : "translate-x-full"
+            "absolute inset-0 transition-opacity duration-300 bg-black/50 backdrop-blur-sm",
+            isMenuOpen ? "opacity-100" : "opacity-0"
           )}
-          id="mobile-nav"
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        <div 
+          className={cn(
+            "absolute top-0 right-0 h-full w-64 bg-[#0a0a0a] flex flex-col items-end justify-center py-6 pr-6 transform transition-all duration-300 ease-in-out shadow-2xl border-l border-white/10",
+            isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          )}
+          onClick={(e) => e.stopPropagation()}
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              prefetch={true}
-              onClick={() => setMenuOpen(false)}
-              className="text-white/90 hover:text-brand-wood text-base font-medium tracking-tight py-4 border-b border-white/10 transition-colors duration-200"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Button
-            href="/contact"
-            variant="primary"
-            size="md"
-            arrow
-            className="mt-8"
-            id="mobile-cta"
+          {/* Close button */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 left-6 text-white hover:text-brand-wood transition-colors duration-200 p-1"
           >
-            Get a Free Quote
-          </Button>
-        </nav>
+            <X className="h-6 w-6" />
+          </button>
+          
+          <nav className="flex flex-col space-y-4 mt-8 w-full">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                prefetch={true}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "px-4 py-3 text-lg font-semibold text-white hover:bg-white/10 transition-all duration-300 text-center transform relative overflow-hidden tracking-wide",
+                  isMenuOpen ? "opacity-100 translate-x-0 delay-100" : "opacity-0 translate-x-4"
+                )}
+                style={{ transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' }}
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            <div className={cn(
+              "pt-8 w-full px-4 flex justify-center transition-all duration-300 transform",
+              isMenuOpen ? "opacity-100 translate-x-0 delay-300" : "opacity-0 translate-x-4"
+            )}>
+              <Button
+                href="/contact"
+                variant="primary"
+                size="md"
+                arrow
+              >
+                Get a Free Quote
+              </Button>
+            </div>
+          </nav>
+        </div>
       </div>
     </>
   );

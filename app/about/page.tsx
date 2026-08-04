@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 import { getSiteConfig } from "@/lib/data-service";
 import { generatePageMetadata } from "@/lib/seo";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
@@ -21,24 +22,15 @@ export default async function AboutPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="bg-brand-dark pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-wood rounded-full blur-3xl" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="block w-8 h-0.5 bg-brand-wood" />
-            <p className="text-brand-woodLight text-xs sm:text-sm font-semibold tracking-wider uppercase">About Us</p>
-          </div>
-          <h1 className="text-fluid-h2 font-semibold md:font-bold text-white mb-4 tracking-[-0.03em] leading-[1.08]">
-            Building Your Vision With{" "}
-            <span className="text-brand-wood">Expertise</span> and Integrity.
-          </h1>
-          <p className="text-white/70 text-base md:text-lg font-normal leading-relaxed tracking-tight max-w-2xl">
-            {about.body}
-          </p>
-        </div>
-      </section>
+      <AnimatedPageHero
+        title={"Building Your Vision With\nExpertise and Integrity."}
+        highlightWord="Expertise"
+        description={about.body}
+        breadcrumbs={[
+          { label: "HOME", href: "/" },
+          { label: "ABOUT US" }
+        ]}
+      />
 
       {/* Stats */}
       <section className=" py-0">

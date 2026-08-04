@@ -212,7 +212,7 @@ function Mobile3DTestimonialsSlider({ testimonials }: { testimonials: Testimonia
 
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   return (
-    <section id="testimonials" className="relative bg-[#faf9f7] py-24 md:py-32 overflow-hidden">
+    <section id="testimonials" className="relative bg-[#faf9f7] py-12 md:py-16 overflow-hidden">
       {/* Ambient background accents */}
       <div className="pointer-events-none absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-brand-dark/[0.05] blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 -right-24 w-[480px] h-[480px] rounded-full bg-amber-400/[0.06] blur-3xl" />

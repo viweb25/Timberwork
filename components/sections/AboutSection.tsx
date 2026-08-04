@@ -11,7 +11,7 @@ export function AboutSection({ config }: AboutSectionProps) {
   const { about } = config;
 
   return (
-    <section id="about" className="bg-brand-cream py-20 md:py-28">
+    <section id="about" className="bg-brand-cream py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left: text */}

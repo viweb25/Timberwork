@@ -4,6 +4,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { ProjectHighlightsGrid } from "@/components/sections/ProjectHighlightsGrid";
 import { getProjectCategories, getProjectHighlights } from "@/lib/data-service";
 import { generatePageMetadata } from "@/lib/seo";
+import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = generatePageMetadata({
@@ -22,21 +23,15 @@ export default async function ProjectsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-dark pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="block w-8 h-0.5 bg-brand-wood" />
-            <p className="text-brand-woodLight text-xs sm:text-sm font-semibold tracking-wider uppercase">Our Projects</p>
-          </div>
-          <h1 className="text-fluid-h2 font-semibold md:font-bold text-white mb-4 tracking-[-0.03em] leading-[1.08]">
-            Delivering Quality Across{" "}
-            <span className="text-brand-wood">Every Sector</span>
-          </h1>
-          <p className="text-white/70 text-base md:text-lg font-normal leading-relaxed tracking-tight max-w-2xl">
-            Residential, commercial and industrial projects delivered with pride across Singapore since 2021.
-          </p>
-        </div>
-      </section>
+      <AnimatedPageHero
+        title={"Delivering Quality Across\nEvery Sector"}
+        highlightWord="Every Sector"
+        description="Residential, commercial and industrial projects delivered with pride across Singapore since 2021."
+        breadcrumbs={[
+          { label: "HOME", href: "/" },
+          { label: "OUR PROJECTS" }
+        ]}
+      />
 
       {/* Categories grid */}
       <section className="bg-white py-16 md:py-24">

@@ -7,7 +7,7 @@ export interface Service {
   title: string;
   shortDescription: string;
   fullDescription: string;
-  icon: "building" | "house" | "interior" | "mep" | "wrench";
+  icon: "building" | "house" | "interior" | "mep" | "wrench" | "ceiling";
   features: string[];
   image?: string;
 }

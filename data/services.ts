@@ -1,87 +1,110 @@
-﻿// data/services.ts
+// data/services.ts
 // Source: homepage mockup "Our Services" section
 
 import type { Service } from "@/types";
 
 export const servicesData: Service[] = [
   {
-    slug: "general-construction",
-    title: "General Construction",
-    shortDescription: "Building with strength and precision.",
+    slug: "roller-shutter",
+    title: "Roller Shutter Installation & Maintenance Specialists",
+    shortDescription: "Installation, repair and emergency breakdown support.",
     fullDescription:
-      "Timberpark delivers comprehensive general construction services across Singapore, covering new builds, additions and alterations (A&A works), structural work, and full project management from tender to handover. We work across residential, commercial and industrial sectors, ensuring every project is completed safely, on time and to specification.",
+      "Installation of roller shutters, repair and maintenance services, emergency breakdown support for industrial, commercial & residential solutions.",
     icon: "building",
     features: [
-      "New building construction",
-      "Additions & alterations (A&A)",
-      "Structural works",
-      "Concrete & RC works",
-      "Project management",
-      "BCA compliance & safety",
+      "Installation of roller shutters",
+      "Repair and maintenance services",
+      "Emergency breakdown support",
+      "Industrial, commercial & residential solutions",
     ],
   },
   {
-    slug: "renovation-works",
-    title: "Renovation Works",
-    shortDescription: "Transforming spaces with quality.",
+    slug: "painting-services",
+    title: "Painting Services",
+    shortDescription: "Residential, commercial, interior & exterior painting.",
     fullDescription:
-      "Whether it's a HDB flat, condominium, landed property or commercial unit, our renovation team transforms spaces with precision and craftsmanship. We handle full gut renovations, partial remodels, and tenant fit-outs â€” coordinating all trades under one roof to minimise disruption and deliver on schedule.",
-    icon: "house",
-    features: [
-      "HDB & condominium renovation",
-      "Landed property renovation",
-      "Commercial & office fit-out",
-      "Full & partial renovation",
-      "Wet works (hacking, tiling, plastering)",
-      "Carpentry & built-in joinery",
-    ],
-  },
-  {
-    slug: "interior-works",
-    title: "Interior Works",
-    shortDescription: "Functional, aesthetic and innovative.",
-    fullDescription:
-      "Our interior works team brings spaces to life through thoughtful design, quality materials and skilled execution. From feature walls and ceilings to bespoke cabinetry and marble installation, we create interiors that are both beautiful and built to last â€” tailored to each client's vision and lifestyle.",
+      "Professional painting services covering residential and commercial properties, including interior, exterior painting, repainting and touch-ups.",
     icon: "interior",
     features: [
-      "Interior design & planning",
-      "Feature walls & ceilings",
-      "Flooring (timber, vinyl, tile, marble)",
-      "Marble & stone installation",
-      "Custom cabinetry & built-ins",
-      "Painting & finishes",
+      "Residential painting",
+      "Commercial painting",
+      "Interior & exterior painting",
+      "Repainting and touch-ups",
     ],
   },
   {
-    slug: "mne-services",
-    title: "M&E Services",
-    shortDescription: "Safe, efficient and reliable systems.",
+    slug: "vinyl-flooring",
+    title: "Vinyl Flooring",
+    shortDescription: "Waterproof and durable flooring options.",
     fullDescription:
-      "Our Mechanical & Electrical (M&E) team provides certified installation, testing and commissioning of all building services. From electrical wiring and lighting to plumbing, air-conditioning and fire protection systems, we ensure every system meets Singapore's safety codes and regulatory standards.",
-    icon: "mep",
+      "Supply and installation of residential & commercial vinyl flooring. Waterproof and durable flooring options, including floor replacement and repairs.",
+    icon: "house",
     features: [
-      "Electrical installation & wiring",
-      "Lighting design & installation",
-      "Plumbing & sanitary works",
-      "Air-conditioning (ACMV) systems",
-      "Underground & overhead piping",
-      "Fire protection systems",
+      "Supply and installation",
+      "Residential & commercial flooring",
+      "Waterproof and durable flooring options",
+      "Floor replacement and repairs",
     ],
   },
   {
-    slug: "maintenance-services",
-    title: "Maintenance Services",
-    shortDescription: "Keeping your property in perfect condition.",
+    slug: "ceiling-partition-works",
+    title: "Ceiling & Partition Works",
+    shortDescription: "Gypsum ceilings, office partitions and more.",
     fullDescription:
-      "Protecting the value of your property requires proactive maintenance. Timberpark offers scheduled and ad-hoc maintenance programmes for residential, commercial and industrial properties â€” covering everything from minor repairs and waterproofing to building inspections and ongoing facility management.",
+      "Expert ceiling and partition works including gypsum ceilings, office partition systems, false ceilings, renovation and space planning.",
+    icon: "ceiling",
+    features: [
+      "Gypsum ceilings",
+      "Office partition systems",
+      "False ceilings",
+      "Renovation and space planning",
+    ],
+  },
+  {
+    slug: "hacking-works",
+    title: "Hacking Works",
+    shortDescription: "Wall hacking, demolition and safe disposal.",
+    fullDescription:
+      "Professional hacking works including wall hacking, floor tile removal, full demolition works and safe debris disposal.",
     icon: "wrench",
     features: [
-      "Preventive maintenance programmes",
-      "Waterproofing & leakage repair",
-      "Building inspections",
-      "Touch-up painting & patching",
-      "Timber deck maintenance",
-      "General property repairs",
+      "Wall hacking",
+      "Floor tile removal",
+      "Demolition works",
+      "Safe debris disposal",
+    ],
+  },
+  {
+    slug: "renovation",
+    title: "HDB & Condo Renovation",
+    shortDescription: "Complete home, kitchen and bathroom renovations.",
+    fullDescription:
+      "Complete home renovation services for HDB & Condo, including kitchen renovation, bathroom renovation, interior upgrading and A&A works.",
+    icon: "house",
+    features: [
+      "Complete home renovation",
+      "Kitchen renovation",
+      "Bathroom renovation",
+      "Interior upgrading",
+      "Addition & Alteration (A&A) works",
+    ],
+  },
+  {
+    slug: "electrical-services",
+    title: "Electrical Services",
+    shortDescription: "Complete rewiring, lighting and maintenance.",
+    fullDescription:
+      "Comprehensive electrical services from accessories installation, house rewiring, power socket setup to distribution board replacement and fault finding.",
+    icon: "mep",
+    features: [
+      "Electrical accessories installation",
+      "Complete house rewiring",
+      "Power socket & switch installation",
+      "Lighting installation & replacement",
+      "Ceiling fan installation",
+      "Distribution board (DB) installation & replacement",
+      "Electrical fault finding & troubleshooting",
+      "Residential & commercial electrical maintenance",
     ],
   },
 ];

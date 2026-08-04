@@ -9,7 +9,7 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ services }: ServicesSectionProps) {
   return (
-    <section id="services" className="bg-white py-20 md:py-28">
+    <section id="services" className="bg-white py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Our Services"
@@ -20,7 +20,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {services.map((service) => (
+          {services.slice(0, 5).map((service) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
@@ -44,6 +44,20 @@ export function ServicesSection({ services }: ServicesSectionProps) {
             </Link>
           ))}
         </div>
+
+        {services.length > 5 && (
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-dark text-white text-sm font-semibold tracking-wide rounded-full hover:bg-brand-wood transition-colors group shadow-md"
+            >
+              View All Services
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

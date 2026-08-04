@@ -33,7 +33,7 @@ export function ServicesGridInteractive({ services }: Props) {
           {/* Mobile Section Sub-Header */}
           <div className="flex items-center justify-between px-1 mb-3">
             <span className="text-xs font-semibold tracking-wider text-brand-wood uppercase">
-              All 6 Core Services
+              All Core Services
             </span>
             <span className="text-[10px] font-medium text-gray-500 bg-gray-200/60 px-2.5 py-1 rounded-full tracking-tight">
               Tap card to view details
@@ -111,7 +111,7 @@ export function ServicesGridInteractive({ services }: Props) {
                             <p className="text-xs font-semibold tracking-wider text-brand-dark/60 mb-1 uppercase">
                               Key Highlights:
                             </p>
-                            {service.features.slice(0, 5).map((f: string) => (
+                            {service.features.slice(0, 8).map((f: string) => (
                               <div key={f} className="flex items-start gap-2.5">
                                 <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-wood shrink-0" />
                                 <span className="text-xs font-normal text-brand-dark/90">{f}</span>
@@ -235,7 +235,7 @@ export function ServicesGridInteractive({ services }: Props) {
 
                 {/* Features - 2 column grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mb-10">
-                  {active.features.slice(0, 6).map((f: string) => (
+                  {active.features.slice(0, 8).map((f: string) => (
                     <div key={f} className="flex items-start gap-3">
                       <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-wood flex-shrink-0" />
                       <span className="text-sm font-normal text-brand-dark/90">{f}</span>
