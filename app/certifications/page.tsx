@@ -1,4 +1,4 @@
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +8,7 @@ export const metadata: Metadata = generatePageMetadata({
   title: "Certifications",
   description: "Timberpark Pte. Ltd. is registered and licensed with the Building and Construction Authority (BCA), demonstrating our commitment to quality, safety, and compliance.",
   path: "/certifications",
+  keywords: ["BCA registered contractor", "licensed builder singapore", "construction safety certifications"],
 });
 
 // Icon Sizes increased to w-12 h-12 (or w-full h-full to fit parent)
@@ -116,8 +117,15 @@ const bcaLicensedBuilders = [
 ];
 
 export default function CertificationsPage() {
+  const webPageSchema = generateWebPageSchema("Certifications", metadata.description as string, "/certifications");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Certifications", url: "/certifications" },
+  ]);
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageSchema, breadcrumbSchema]) }} />
       {/* Hero Section */}
       <AnimatedPageHero
         title={"CERTIFICATIONS &\nLICENSING"}

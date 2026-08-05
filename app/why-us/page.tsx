@@ -1,19 +1,27 @@
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { CTABanner } from "@/components/sections/CTABanner";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Why Choose Us",
   description:
-    "Discover why homeowners and businesses across Singapore trust Timberpark Pte. Ltd. for construction and renovation â€” quality, safety, transparency and on-time delivery.",
+    "Discover why homeowners and businesses across Singapore trust Timberpark Pte. Ltd. for construction and renovation — quality, safety, transparency and on-time delivery.",
   path: "/why-us",
+  keywords: ["reliable contractor singapore", "best renovation company", "trusted builder singapore"],
 });
 
 export default function WhyUsPage() {
+  const webPageSchema = generateWebPageSchema("Why Choose Us", metadata.description as string, "/why-us");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Why Choose Us", url: "/why-us" },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageSchema, breadcrumbSchema]) }} />
       {/* Hero */}
       <AnimatedPageHero
         title={"The Timberpark\nDifference"}

@@ -1,6 +1,6 @@
 import { ContactForm } from "@/components/sections/ContactForm";
 import { getSiteConfig } from "@/lib/data-service";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 
@@ -9,14 +9,22 @@ export const metadata: Metadata = generatePageMetadata({
   description:
     "Contact Timberpark Pte. Ltd. for a free construction or renovation quote in Singapore. Call +91 82177 50424 or email timberpark4@gmail.com.",
   path: "/contact",
+  keywords: ["contact Timberpark", "renovation quote singapore", "construction consultation"],
 });
 
 export default async function ContactPage() {
   const config = await getSiteConfig();
   const { contact } = config;
 
+  const webPageSchema = generateWebPageSchema("Contact Us", metadata.description as string, "/contact");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Contact Us", url: "/contact" },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageSchema, breadcrumbSchema]) }} />
       {/* Hero */}
       <AnimatedPageHero
         title={"Let's Build Something\nGreat Together"}

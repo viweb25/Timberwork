@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { ProjectHighlightsGrid } from "@/components/sections/ProjectHighlightsGrid";
 import { getProjectCategories, getProjectHighlights } from "@/lib/data-service";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 import type { Metadata } from "next";
 
@@ -12,6 +12,7 @@ export const metadata: Metadata = generatePageMetadata({
   description:
     "Explore Timberpark's completed projects across residential HDB, landed houses, commercial offices and industrial warehouses in Singapore.",
   path: "/projects",
+  keywords: ["past projects singapore", "HDB renovation portfolio", "commercial renovation projects", "industrial construction singapore"],
 });
 
 export default async function ProjectsPage() {
@@ -20,8 +21,15 @@ export default async function ProjectsPage() {
     getProjectHighlights(),
   ]);
 
+  const webPageSchema = generateWebPageSchema("Our Projects", metadata.description as string, "/projects");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Our Projects", url: "/projects" },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageSchema, breadcrumbSchema]) }} />
       {/* Hero */}
       <AnimatedPageHero
         title={"Delivering Quality Across\nEvery Sector"}

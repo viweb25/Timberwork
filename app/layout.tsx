@@ -3,7 +3,11 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LogoIntro } from "@/components/layout/LogoIntro";
-import { generateLocalBusinessSchema } from "@/lib/seo";
+import { 
+  generateLocalBusinessSchema, 
+  generateOrganizationSchema, 
+  generateWebSiteSchema 
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://timberpark.com.sg"),
@@ -33,6 +37,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "YOUR_GOOGLE_VERIFICATION_CODE",
+  },
 };
 
 export default function RootLayout({
@@ -40,14 +47,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const schema = generateLocalBusinessSchema();
+  const localBusinessSchema = generateLocalBusinessSchema();
+  const orgSchema = generateOrganizationSchema();
+  const webSiteSchema = generateWebSiteSchema();
 
   return (
     <html lang="en">
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, orgSchema, webSiteSchema]) }}
         />
       </head>
       <body className="min-h-screen flex flex-col">

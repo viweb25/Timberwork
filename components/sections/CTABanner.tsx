@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 interface CTABannerProps {
   heading?: string;
@@ -19,10 +20,12 @@ export function CTABanner({
     <section id="cta-banner" className="relative bg-brand-charcoal py-3 sm:py-6 md:py-8 overflow-hidden">
       {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src={bgImageUrl}
           alt="CTA background"
-          className="w-full h-full object-cover object-center"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
         />
         {/* Dark Overlay for Readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark100 via-brand-dark/90 to-transparent" />
@@ -35,11 +38,13 @@ export function CTABanner({
           {/* Left Side: Logo + Single Line Text */}
           <div className="flex flex-row items-center gap-0.5 sm:gap-4 flex-1 min-w-0">
             {/* Logo Icon */}
-            <div className="flex-shrink-0 w-9 h-9 min-[380px]:w-11 min-[380px]:h-11 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
-              <img 
+            <div className="flex-shrink-0 w-9 h-9 min-[380px]:w-11 min-[380px]:h-11 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center relative">
+              <Image 
                 src="https://res.cloudinary.com/defqgygsf/image/upload/v1785310036/img7-removebg-preview_uru6ii.png" 
                 alt="CTA Icon" 
-                className="w-full h-full object-contain" 
+                fill
+                sizes="(max-width: 640px) 44px, (max-width: 768px) 80px, 96px"
+                className="object-contain" 
               />
             </div>
 

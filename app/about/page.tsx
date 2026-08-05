@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { CertificationsSection } from "@/components/sections/CertificationsSection";
 import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 import { getSiteConfig } from "@/lib/data-service";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 import { StatIcon } from "@/components/ui/StatIcon";
 import type { Metadata } from "next";
@@ -13,14 +14,22 @@ export const metadata: Metadata = generatePageMetadata({
   description:
     "Learn about Timberpark Pte. Ltd. at Singapore's trusted construction and renovation company. Our mission, vision, history and values since 2021.",
   path: "/about",
+  keywords: ["about Timberpark", "construction history singapore", "renovation experts singapore", "BCA registered contractor"],
 });
 
 export default async function AboutPage() {
   const config = await getSiteConfig();
   const { about, contact, stats, uen, yearFounded } = config;
 
+  const webPageSchema = generateWebPageSchema("About Us", metadata.description as string, "/about");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About Us", url: "/about" },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageSchema, breadcrumbSchema]) }} />
       {/* Page Hero */}
       <AnimatedPageHero
         title={"Building Your Vision With\nExpertise and Integrity."}
@@ -64,7 +73,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-brand-cream py-20 md:py-28">
+      <section className="bg-brand-cream py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
             <div>
@@ -132,6 +141,9 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Certifications Section */}
+      <CertificationsSection />
 
       <CTABanner />
     </>

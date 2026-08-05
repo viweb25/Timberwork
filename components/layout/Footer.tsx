@@ -11,11 +11,13 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
-  { label: "General Construction", href: "/services/general-construction" },
-  { label: "Renovation Works", href: "/services/renovation-works" },
-  { label: "Interior Works", href: "/services/interior-works" },
-  { label: "M&E Services", href: "/services/mne-services" },
-  { label: "Maintenance Services", href: "/services/maintenance-services" },
+  { label: "Roller Shutter Specialists", href: "/services/roller-shutter" },
+  { label: "Painting Services", href: "/services/painting-services" },
+  { label: "Vinyl Flooring", href: "/services/vinyl-flooring" },
+  { label: "Ceiling & Partition Works", href: "/services/ceiling-partition-works" },
+  { label: "Hacking Works", href: "/services/hacking-works" },
+  { label: "HDB & Condo Renovation", href: "/services/renovation" },
+  { label: "Electrical Services", href: "/services/electrical-services" },
 ];
 
 export function Footer() {

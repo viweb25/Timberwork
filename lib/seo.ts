@@ -4,12 +4,14 @@
 import type { Metadata } from "next";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://timberpark.com.sg";
+const SITE_NAME = "Timberpark Pte. Ltd.";
 
 export interface PageSEO {
   title: string;
   description: string;
   path?: string;
   image?: string;
+  keywords?: string[];
 }
 
 export function generatePageMetadata({
@@ -17,22 +19,34 @@ export function generatePageMetadata({
   description,
   path = "",
   image = "/images/og-default.jpg",
+  keywords = [],
 }: PageSEO): Metadata {
   const url = `${BASE_URL}${path}`;
   const fullTitle = title === "Home"
-    ? "Timberpark Pte. Ltd. | Renovation & Construction Singapore"
-    : `${title} | Timberpark Pte. Ltd.`;
+    ? `${SITE_NAME} | Renovation & Construction Singapore`
+    : `${title} | ${SITE_NAME}`;
+
+  const defaultKeywords = [
+    "renovation Singapore",
+    "construction company Singapore",
+    "HDB renovation",
+    "commercial renovation",
+    "interior works Singapore",
+    "M&E services",
+    "Timberpark",
+  ];
 
   return {
     title: fullTitle,
     description,
+    keywords: [...defaultKeywords, ...keywords],
     metadataBase: new URL(BASE_URL),
     alternates: { canonical: url },
     openGraph: {
       title: fullTitle,
       description,
       url,
-      siteName: "Timberpark Pte. Ltd.",
+      siteName: SITE_NAME,
       images: [{ url: image, width: 1200, height: 630, alt: fullTitle }],
       locale: "en_SG",
       type: "website",
@@ -46,8 +60,67 @@ export function generatePageMetadata({
     robots: {
       index: true,
       follow: true,
-      googleBot: { index: true, follow: true },
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
     },
+  };
+}
+
+export function generateOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: BASE_URL,
+    logo: `${BASE_URL}/images/logo.png`, // Update with actual logo path if needed
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+918217750424",
+      contactType: "customer service",
+      email: "timberpark4@gmail.com",
+      areaServed: "SG",
+      availableLanguage: "en",
+    },
+    sameAs: [
+      "https://www.facebook.com/timberpark", // Placeholder
+      "https://www.linkedin.com/company/timberpark", // Placeholder
+    ],
+  };
+}
+
+export function generateWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: BASE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${BASE_URL}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function generateWebPageSchema(title: string, description: string, path: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description: description,
+    url: `${BASE_URL}${path}`,
+  };
+}
+
+export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${BASE_URL}${item.url}`,
+    })),
   };
 }
 
@@ -55,11 +128,12 @@ export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "GeneralContractor"],
-    name: "Timberpark Pte. Ltd.",
+    name: SITE_NAME,
     alternateName: "Timberpark",
     description:
       "Singapore-based construction and renovation company delivering reliable, high-quality solutions for residential, commercial and industrial projects since 2021.",
     url: BASE_URL,
+    logo: `${BASE_URL}/images/logo.png`,
     telephone: "+918217750424",
     email: "timberpark4@gmail.com",
     foundingDate: "2021",
@@ -106,6 +180,9 @@ export function generateLocalBusinessSchema() {
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Maintenance Services" } },
       ],
     },
-    sameAs: [],
+    sameAs: [
+      "https://www.facebook.com/timberpark",
+      "https://www.linkedin.com/company/timberpark"
+    ],
   };
 }

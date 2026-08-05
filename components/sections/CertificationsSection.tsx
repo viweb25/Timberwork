@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const CERTIFICATION_ICONS = [
   "https://res.cloudinary.com/defqgygsf/image/upload/v1785830661/6327_uwa04g.png",
@@ -62,11 +63,13 @@ export function CertificationsSection() {
               <div className="p-8 flex-1 flex flex-col items-center text-center">
                 
                 {/* Fixed Container for Even Images */}
-                <div className="w-28 h-28 flex items-center justify-center mb-6">
-                  <img 
+                <div className="w-28 h-28 flex items-center justify-center mb-6 relative">
+                  <Image 
                     src={card.icon} 
                     alt="Certification Icon" 
-                    className="w-full h-full object-contain drop-shadow-sm"
+                    fill
+                    sizes="112px"
+                    className="object-contain drop-shadow-sm"
                   />
                 </div>
 
