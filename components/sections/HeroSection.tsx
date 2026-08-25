@@ -220,36 +220,15 @@ export function HeroSection({ config }: HeroSectionProps) {
       {/* Sticky wrapper — pins canvas in viewport while section scrolls */}
       <div className="sticky top-0 w-full h-screen overflow-hidden">
 
-        {/* Loading state */}
-        {!isReady && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-brand-dark">
-            {/* Static fallback first frame */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img1/ezgif-frame-001.jpg"
-              alt="Timberpark construction project"
-              className="absolute inset-0 w-full h-full object-cover opacity-25"
-            />
-            <div className="relative z-20 flex flex-col items-center gap-6">
-              <div className="relative w-20 h-20">
-                <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                  <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="4" />
-                  <circle
-                    cx="40" cy="40" r="34" fill="none"
-                    stroke="#B5651D" strokeWidth="4" strokeLinecap="round"
-                    strokeDasharray={`${2 * Math.PI * 34}`}
-                    strokeDashoffset={`${2 * Math.PI * 34 * (1 - loadPercent / 100)}`}
-                    style={{ transition: "stroke-dashoffset 0.3s ease" }}
-                  />
-                </svg>
-                <span className="absolute inset-0 flex items-center justify-center text-white text-sm font-semibold">
-                  {loadPercent}%
-                </span>
-              </div>
-              <p className="text-white/50 text-xs tracking-widest uppercase">Loading experience…</p>
-            </div>
-          </div>
-        )}
+        {/* Static fallback first frame (always present behind canvas) */}
+        <div className="absolute inset-0 z-0 bg-brand-dark">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/img1/ezgif-frame-001.jpg"
+            alt="Timberpark construction project"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
 
         {/* Canvas */}
         <canvas
@@ -266,7 +245,7 @@ export function HeroSection({ config }: HeroSectionProps) {
 
         {/* ── Initial hero text (typing animation) — fades out at end ── */}
         <div
-          className="absolute inset-0 z-20 flex flex-col"
+          className="absolute inset-0 z-20 hidden md:flex flex-col"
           style={{
             opacity: showFinalOverlay ? 0 : 1,
             transition: "opacity 0.5s ease",
@@ -335,17 +314,20 @@ export function HeroSection({ config }: HeroSectionProps) {
                     <span className="block w-8 h-0.5 bg-brand-wood" />
                     <p className="text-brand-woodLight text-xs sm:text-sm font-semibold tracking-wider uppercase">{hero.eyebrow}</p>
                   </div>
-                  {/* Headline — word-by-word stagger reveal */}
+                  {/* Headline */}
                   <h1 className="text-fluid-hero font-semibold lg:font-bold text-white tracking-[-0.035em] leading-[1.08] drop-shadow-lg" style={{ textShadow: "2px 2px 2px rgba(0,0,0,0.8)" }}>
-                    {baseHeadline.split(" ").map((word, wi) => (
-                      <span key={wi} className="inline-block mr-[0.25em]" style={{ animation: showFinalOverlay ? `heroWordReveal 0.7s cubic-bezier(0.16,1,0.3,1) ${0.2 + wi * 0.07}s both` : "none" }}>
-                        {word}
-                      </span>
-                    ))}
-                    <br />
-                    <span className="text-brand-wood inline-block" style={{ animation: showFinalOverlay ? `heroWordReveal 0.8s cubic-bezier(0.16,1,0.3,1) ${0.2 + baseHeadline.split(" ").length * 0.07}s both` : "none" }}>
-                      {lastWord}
-                    </span>
+                    {isClient ? (
+                      <>
+                        {displayBase}
+                        {displayText.length > baseHeadline.length && <br />}
+                        <span className="text-brand-wood">{displayLast}</span>
+                      </>
+                    ) : (
+                      <>
+                        {baseHeadline}<br />
+                        <span className="text-brand-wood">{lastWord}</span>
+                      </>
+                    )}
                   </h1>
                   {/* Description fade up */}
                   <div style={{ animation: showFinalOverlay ? "heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both" : "none" }}>
