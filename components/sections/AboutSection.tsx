@@ -2,17 +2,36 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import type { SiteConfig } from "@/types";
-
+import { StatIcon } from "@/components/ui/StatIcon";
 interface AboutSectionProps {
   config: SiteConfig;
+
 }
 
 export function AboutSection({ config }: AboutSectionProps) {
   const { about } = config;
+  const { hero, stats } = config;
 
   return (
-    <section id="about" className="bg-brand-cream py-10 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="bg-brand-cream">
+      {/* Stats bar */}
+      <div className="w-full bg-brand-dark border-b border-white/10 shadow-xl">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-white/15">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex items-center gap-4 lg:px-6 xl:px-8 justify-start">
+                <div className="flex-shrink-0"><StatIcon index={i} /></div>
+                <div className="flex flex-col justify-center text-left flex-1 min-w-0">
+                  <p className="text-left text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-[-0.03em] leading-none mb-1">{stat.value}</p>
+                  <p className="text-left text-white/70 text-xs tracking-tight font-medium leading-snug">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left: text */}
           <div>

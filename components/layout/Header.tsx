@@ -22,11 +22,20 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
+      const hero = document.getElementById('hero');
+      if (hero) {
+        // Turn black when scrolled past the hero section (minus a small offset for transition)
+        const isPastHero = window.scrollY >= (hero.offsetHeight - 80);
+        setIsScrolled(isPastHero);
+      } else {
+        const scrollTop = window.scrollY;
+        setIsScrolled(scrollTop > 50);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Call once to set initial state
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
