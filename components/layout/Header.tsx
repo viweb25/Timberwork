@@ -55,13 +55,13 @@ export function Header() {
             <div className="flex items-center z-20">
               <Link href="/" className="flex items-center gap-0 group">
                 <div className="relative w-[180px] h-[60px] md:w-[280px] md:h-[80px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-                  {/* <Image
+                  <Image
                     src="https://res.cloudinary.com/defqgygsf/image/upload/v1785313073/logoo-removebg-preview_qa5j6h.png"
                     alt="Timberpark Pte. Ltd. Logo"
                     fill
                     className="object-contain object-left"
                     priority
-                  /> */}
+                  />
                 </div>
               </Link>
             </div>
