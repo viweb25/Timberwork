@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import type { SiteConfig } from "@/types";
 import { StatIcon } from "@/components/ui/StatIcon";
@@ -8,7 +9,11 @@ import { StatIcon } from "@/components/ui/StatIcon";
 // ─── Constants ────────────────────────────────────────────────────────────────
 const TOTAL_FRAMES = 300;
 const SCROLL_HEIGHT_VH = 400; // 400vh total scroll height
-const MIN_LOADED_TO_START = 30; // show canvas once this many frames are decoded
+const MIN_LOADED_TO_START = 1; // show canvas once this many frames are decoded
+
+// Global cache to prevent reloading images on component remount or navigation
+const globalImagesCache: (HTMLImageElement | null)[] = Array(TOTAL_FRAMES).fill(null);
+let globalLoadedCount = 0;
 
 function getFrameUrls(): string[] {
   return Array.from({ length: TOTAL_FRAMES }, (_, i) => {
@@ -171,26 +176,69 @@ export function HeroSection({ config }: HeroSectionProps) {
 
   // ── Preload all 300 images ────────────────────────────────────────────────
   useEffect(() => {
-    const urls = getFrameUrls();
     let mounted = true;
-    urls.forEach((url, i) => {
+    
+    // If all frames are already cached
+    if (globalLoadedCount >= TOTAL_FRAMES) {
+      imagesRef.current = [...globalImagesCache];
+      loadedCountRef.current = globalLoadedCount;
+      setLoadedCount(globalLoadedCount);
+      setIsReady(true);
+      return;
+    }
+
+    // If partially cached, copy over what we have
+    if (globalLoadedCount > 0) {
+      imagesRef.current = [...globalImagesCache];
+      loadedCountRef.current = globalLoadedCount;
+      setLoadedCount(globalLoadedCount);
+      if (globalLoadedCount >= MIN_LOADED_TO_START) setIsReady(true);
+    }
+
+    const urls = getFrameUrls();
+    
+    // Helper to load a frame
+    const loadFrame = (i: number) => {
+      if (globalImagesCache[i]) return; // already loaded or loading
+      
       const img = new window.Image();
-      img.src = url;
+      globalImagesCache[i] = img; // store reference early to prevent duplicate loads
+      img.src = urls[i];
+      
       img.onload = () => {
+        globalLoadedCount += 1;
         if (!mounted) return;
         imagesRef.current[i] = img;
-        loadedCountRef.current += 1;
-        setLoadedCount(loadedCountRef.current);
+        loadedCountRef.current = globalLoadedCount;
+        setLoadedCount(globalLoadedCount);
         if (i === 0) drawFrame(0);
-        if (loadedCountRef.current >= MIN_LOADED_TO_START) setIsReady(true);
+        if (globalLoadedCount >= MIN_LOADED_TO_START) setIsReady(true);
       };
+      
       img.onerror = () => {
+        globalLoadedCount += 1;
         if (!mounted) return;
-        loadedCountRef.current += 1;
-        setLoadedCount(loadedCountRef.current);
+        loadedCountRef.current = globalLoadedCount;
+        setLoadedCount(globalLoadedCount);
       };
-    });
-    return () => { mounted = false; };
+    };
+
+    // Load first batch (priority)
+    for (let i = 0; i < MIN_LOADED_TO_START; i++) {
+      loadFrame(i);
+    }
+
+    // Load the rest slightly later to prioritize initial frames and main thread
+    const timeout = setTimeout(() => {
+      for (let i = MIN_LOADED_TO_START; i < TOTAL_FRAMES; i++) {
+        loadFrame(i);
+      }
+    }, 150);
+
+    return () => { 
+      mounted = false; 
+      clearTimeout(timeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -222,11 +270,13 @@ export function HeroSection({ config }: HeroSectionProps) {
 
         {/* Static fallback first frame (always present behind canvas) */}
         <div className="absolute inset-0 z-0 bg-brand-dark">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/img1/ezgif-frame-001.jpg"
             alt="Timberpark construction project"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            quality={90}
+            className="object-cover"
           />
         </div>
 

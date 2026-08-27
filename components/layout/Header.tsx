@@ -41,11 +41,11 @@ export function Header() {
 
   return (
     <>
-      <header 
+      <header
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-          isScrolled 
-            ? 'bg-black border-b border-white/10 shadow-lg' 
+          isScrolled
+            ? 'bg-black border-b border-white/10 shadow-lg'
             : 'bg-transparent border-b border-transparent'
         )}
       >
@@ -55,17 +55,17 @@ export function Header() {
             <div className="flex items-center z-20">
               <Link href="/" className="flex items-center gap-0 group">
                 <div className="relative w-[180px] h-[60px] md:w-[280px] md:h-[80px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-                  <Image
+                  {/* <Image
                     src="https://res.cloudinary.com/defqgygsf/image/upload/v1785313073/logoo-removebg-preview_qa5j6h.png"
                     alt="Timberpark Pte. Ltd. Logo"
                     fill
                     className="object-contain object-left"
                     priority
-                  />
+                  /> */}
                 </div>
               </Link>
             </div>
-            
+
             {/* Absolutely Centered Navigation - Only visible on large screens (desktop) */}
             <nav className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 gap-8 text-[15px] font-medium tracking-wide z-10">
               {navLinks.map((link) => (
@@ -79,7 +79,7 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            
+
             {/* Mobile menu button and CTA on the right */}
             <div className="flex items-center gap-4 z-20">
               <Button
@@ -92,7 +92,7 @@ export function Header() {
                 Get a Free Quote
               </Button>
 
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={cn(
                   "lg:hidden p-2 hover:bg-white/10 rounded-md transition-all duration-300 relative group",
@@ -112,21 +112,21 @@ export function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div 
+      <div
         className={cn(
           "fixed inset-0 z-50 lg:hidden transition-all duration-300",
           isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
-        <div 
+        <div
           className={cn(
             "absolute inset-0 transition-opacity duration-300 bg-black/50 backdrop-blur-sm",
             isMenuOpen ? "opacity-100" : "opacity-0"
           )}
           onClick={() => setIsMenuOpen(false)}
         />
-        
-        <div 
+
+        <div
           className={cn(
             "absolute top-0 right-0 h-full w-64 bg-[#0a0a0a] flex flex-col items-end justify-center py-6 pr-6 transform transition-all duration-300 ease-in-out shadow-2xl border-l border-white/10",
             isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
@@ -140,7 +140,7 @@ export function Header() {
           >
             <X className="h-6 w-6" />
           </button>
-          
+
           <nav className="flex flex-col space-y-4 mt-8 w-full">
             {navLinks.map((link, index) => (
               <Link
@@ -157,7 +157,7 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            
+
             <div className={cn(
               "pt-8 w-full px-4 flex justify-center transition-all duration-300 transform",
               isMenuOpen ? "opacity-100 translate-x-0 delay-300" : "opacity-0 translate-x-4"
