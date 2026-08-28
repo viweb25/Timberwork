@@ -67,7 +67,7 @@ export function HeroSection({ config }: HeroSectionProps) {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 bg-brand-dark">
         <Image
-          src="https://res.cloudinary.com/defqgygsf/image/upload/v1787849124/file_0000000053288211aa41f4435c1e8650_hlyoim.png"
+          src="https://res.cloudinary.com/defqgygsf/image/upload/v1787898703/342_fvdig0.png"
           alt="Timberpark construction project"
           fill
           priority
