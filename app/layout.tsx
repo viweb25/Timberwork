@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LogoIntro } from "@/components/layout/LogoIntro";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { 
   generateLocalBusinessSchema, 
   generateOrganizationSchema, 
@@ -64,6 +65,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

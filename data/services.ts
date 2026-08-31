@@ -9,12 +9,13 @@ export const servicesData: Service[] = [
     title: "Roller Shutter Installation & Maintenance Specialists",
     shortDescription: "Installation, repair and emergency breakdown support.",
     fullDescription:
-      "Installation of roller shutters, repair and maintenance services, emergency breakdown support for industrial, commercial & residential solutions.",
+      "Installation of roller shutters, repair and maintenance services, emergency breakdown support for industrial, commercial & residential solutions. We provide installation and support 7 days a week, Monday to Sunday.",
     icon: "building",
     features: [
       "Installation of roller shutters",
       "Repair and maintenance services",
       "Emergency breakdown support",
+      "Installation and support 7 days a week (Mon-Sun)",
       "Industrial, commercial & residential solutions",
     ],
   },

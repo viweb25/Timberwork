@@ -7,7 +7,7 @@ import { AnimatedPageHero } from "@/components/ui/AnimatedPageHero";
 export const metadata: Metadata = generatePageMetadata({
   title: "Contact Us",
   description:
-    "Contact Timberpark Pte. Ltd. for a free construction or renovation quote in Singapore. Call +91 82177 50424 or email timberpark4@gmail.com.",
+    "Contact Timberpark Pte. Ltd. for a free construction or renovation quote in Singapore. Call +65 8424 5286 or +65 8145 2034 or email timberpark4@gmail.com.",
   path: "/contact",
   keywords: ["contact Timberpark", "renovation quote singapore", "construction consultation"],
 });
@@ -61,8 +61,13 @@ export default async function ContactPage() {
                     </svg>
                   ),
                   label: "Phone",
-                  value: contact.phone,
-                  href: `tel:${contact.phone.replace(/\s/g, "")}`,
+                  value: (
+                    <div className="flex flex-col gap-1">
+                      <a href="tel:+6584245286" className="hover:text-brand-wood transition-colors">+65 8424 5286</a>
+                      <a href="tel:+6581452034" className="hover:text-brand-wood transition-colors">+65 8145 2034</a>
+                    </div>
+                  ),
+                  href: undefined,
                 },
                 {
                   id: "contact-email",
@@ -88,12 +93,9 @@ export default async function ContactPage() {
                   href: "https://maps.google.com/?q=60+Paya+Lebar+Road+Singapore+409051",
                 },
               ].map((item) => (
-                <a
+                <div
                   key={item.id}
                   id={item.id}
-                  href={item.href}
-                  target={item.href.startsWith("https") ? "_blank" : undefined}
-                  rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined}
                   className="flex items-start gap-4 p-5 bg-white border border-gray-100 hover:border-brand-wood hover:shadow-card transition-all duration-200 group"
                 >
                   <div className="text-brand-wood group-hover:scale-110 transition-transform duration-200 flex-shrink-0 mt-0.5">
@@ -101,9 +103,17 @@ export default async function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold tracking-wider uppercase text-gray-400 mb-1">{item.label}</p>
-                    <p className="text-brand-dark text-sm font-normal">{item.value}</p>
+                    {item.href ? (
+                      <a href={item.href} target={item.href.startsWith("https") ? "_blank" : undefined} rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined} className="text-brand-dark text-sm font-normal">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <div className="text-brand-dark text-sm font-normal">
+                        {item.value}
+                      </div>
+                    )}
                   </div>
-                </a>
+                </div>
               ))}
 
               {/* Hours */}

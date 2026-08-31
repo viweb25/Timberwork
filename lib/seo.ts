@@ -74,7 +74,7 @@ export function generateOrganizationSchema() {
     logo: `${BASE_URL}/images/logo.png`, // Update with actual logo path if needed
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+918217750424",
+      telephone: "+65 8424 5286",
       contactType: "customer service",
       email: "timberpark4@gmail.com",
       areaServed: "SG",
@@ -134,7 +134,7 @@ export function generateLocalBusinessSchema() {
       "Singapore-based construction and renovation company delivering reliable, high-quality solutions for residential, commercial and industrial projects since 2021.",
     url: BASE_URL,
     logo: `${BASE_URL}/images/logo.png`,
-    telephone: "+918217750424",
+    telephone: "+65 8424 5286",
     email: "timberpark4@gmail.com",
     foundingDate: "2021",
     legalName: "TIMBERPARK PTE. LTD.",

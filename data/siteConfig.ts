@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
   yearFounded: 2021,
 
   contact: {
-    phone: "+91 82177 50424",
+    phone: "+65 8424 5286, +65 8145 2034",
     email: "timberpark4@gmail.com",
     address: "60 Paya Lebar Road, #06-28, Paya Lebar Square, Singapore 409051",
     hours: {
