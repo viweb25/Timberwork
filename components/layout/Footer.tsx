@@ -176,9 +176,19 @@ export function Footer() {
           <p className="text-white/40 text-xs font-normal tracking-tight">
             © {currentYear} Timberpark Pte. Ltd. All Rights Reserved.
           </p>
-          <p className="text-white/30 text-xs font-normal tracking-tight">
-            Co. Reg. No. 202110926M
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-white/30 text-xs font-normal tracking-tight">
+              Co. Reg. No. 202110926M
+            </p>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/privacy-policy" className="text-white/40 hover:text-brand-wood text-xs transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/terms-of-service" className="text-white/40 hover:text-brand-wood text-xs transition-colors">
+              Terms & Services
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
