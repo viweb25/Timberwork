@@ -151,7 +151,7 @@ export function ContactForm() {
             type="tel"
             value={form.phone}
             onChange={handleChange}
-            placeholder="+91 98123 45067"
+            placeholder="+65 8424 5286"
             className="w-full border border-gray-200 bg-white px-4 py-3 text-sm font-normal text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-wood transition-colors duration-200"
           />
         </div>
